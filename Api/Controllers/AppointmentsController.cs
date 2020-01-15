@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using GPConnectAdaptor;
+using GPConnectAdaptor.Models;
 
 namespace Api.Controllers
 {
@@ -11,29 +13,21 @@ namespace Api.Controllers
     [Route("[controller]")]
     public class AppointmentsController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-            "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-        };
 
-        private readonly ILogger<AppointmentsController> _logger;
+    private readonly ILogger<AppointmentsController> _logger;
+    private readonly IOrchestrator _orchestrator;
 
-        public AppointmentsController(ILogger<AppointmentsController> logger)
+        public AppointmentsController(ILogger<AppointmentsController> logger, IOrchestrator orchestrator)
         {
             _logger = logger;
+            _orchestrator = orchestrator;
         }
 
-        [HttpGet]
-        public IEnumerable<WeatherForecast> Get()
+        [HttpPost]
+        public IActionResult AddAppointment([FromBody] AddAppointmentRequest request)
         {
-            var rng = new Random();
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = rng.Next(-20, 55),
-                Summary = Summaries[rng.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var response = _orchestrator.Orchestrate(request);
+            return new JsonResult(response);
         }
     }
 }
