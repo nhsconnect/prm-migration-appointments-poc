@@ -1,10 +1,11 @@
 using System;
+using System.Threading.Tasks;
 using GPConnectAdaptor.Models;
 
 namespace GPConnectAdaptor
 {
     public interface ISlotClient
     {
-        SlotResponse GetSlots(DateTime start, DateTime end);
+        Task<SlotResponse> GetSlots(DateTime start, DateTime end);
     }
 }

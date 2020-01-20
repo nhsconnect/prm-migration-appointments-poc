@@ -1,24 +1,23 @@
 using System;
-using System.Net.Http;
+using System.Net;
+using System.Threading.Tasks;
 using GPConnectAdaptor.Models;
+using Newtonsoft.Json;
 
 namespace GPConnectAdaptor
 {
     public class SlotClient : ISlotClient
     {
-        private readonly IJwtTokenGenerator _tokenGenerator;
+        private readonly ISlotHttpClientWrapper _clientWrapper;
 
-        public SlotClient(IJwtTokenGenerator tokenGenerator)
+        public SlotClient(ISlotHttpClientWrapper clientWrapper)
         {
-            _tokenGenerator = tokenGenerator;
-            var httpClient = new HttpClient();
-            httpClient.Timeout = new TimeSpan(0,0,0,10);
-            httpClient.BaseAddress = new Uri("orange.testlab.co.uk", UriKind.Absolute);
-            httpClient.DefaultRequestHeaders.Add("Ssp-TraceID", new []{"09a01679-2564-0fb4-5129-aecc81ea2706"});
-        }
-        public SlotResponse GetSlots(DateTime start, DateTime end)
+            _clientWrapper = clientWrapper;
+        } 
+        public async Task<SlotResponse> GetSlots(DateTime start, DateTime end)
         {
-            return new SlotResponse();
+            string response = await _clientWrapper.GetAsync(start, end);
+            return JsonConvert.DeserializeObject<SlotResponse>(response);
         }
     }
 }

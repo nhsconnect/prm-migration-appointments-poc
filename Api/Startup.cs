@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GPConnectAdaptor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,6 +27,11 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddScoped<IOrchestrator, MigrationOrchestrator>();
+            services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<ISlotUriGenerator, SlotUriGenerator>();
+            services.AddScoped<ISlotClient, SlotClient>();
+            services.AddScoped<ISlotHttpClientWrapper, SlotHttpClientWrapper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
