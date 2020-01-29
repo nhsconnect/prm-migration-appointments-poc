@@ -36,6 +36,10 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Flurl.Http": {
+              "target": "Package",
+              "version": "[3.0.0-pre3, )"
+            },
             "Hl7.Fhir.STU3": {
               "target": "Package",
               "version": "[1.5.0-beta1, )"

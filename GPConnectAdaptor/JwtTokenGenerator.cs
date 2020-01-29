@@ -50,7 +50,7 @@ namespace GPConnectAdaptor
 					        value = "A11111"
 				        }
 			        },
-			        name = "Consumer Organisation Name"
+			        name = "Consumer organisation name"
 		        },
 		        requesting_practitioner = new RequestingPractitioner()
 		        {

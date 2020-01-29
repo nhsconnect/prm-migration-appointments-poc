@@ -24,9 +24,9 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddAppointment([FromBody] AddAppointmentRequest request)
+        public async Task<JsonResult> AddAppointment([FromBody] AddAppointmentRequest request)
         {
-            var response = _orchestrator.Orchestrate(request);
+            var response = await _orchestrator.Orchestrate(request);
             return new JsonResult(response);
         }
     }

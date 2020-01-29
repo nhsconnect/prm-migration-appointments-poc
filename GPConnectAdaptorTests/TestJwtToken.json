@@ -2,8 +2,8 @@
   "iss": "https://orange.testlab.nhs.uk/",
   "sub": "1",
   "aud": "https://orange.testlab.nhs.uk/gpconnect-demonstrator/v1/fhir",
-  "exp": <<expiry>>,
-  "iat": <<issued_at>>,
+  "exp": 1579863461,
+  "iat": 1579863161,
   "reason_for_request": "directcare",
   "requested_scope": "organization/*.read",
   "requesting_device": {

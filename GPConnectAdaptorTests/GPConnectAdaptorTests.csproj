@@ -19,4 +19,9 @@
       <ProjectReference Include="..\GPConnectAdaptor\GPConnectAdaptor.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="TestJwtToken.json" />
+      <EmbeddedResource Include="TestJwtToken.json" />
+    </ItemGroup>
+
 </Project>

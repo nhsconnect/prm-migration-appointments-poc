@@ -1,4 +1,5 @@
-﻿using GPConnectAdaptor.Models;
+﻿using System.Threading.Tasks;
+using GPConnectAdaptor.Models;
 
 namespace GPConnectAdaptor
 {
@@ -10,9 +11,9 @@ namespace GPConnectAdaptor
         {
             _client = client;
         }
-        public AddAppointmentResponse Orchestrate(AddAppointmentRequest request)
+        public async Task<AddAppointmentResponse> Orchestrate(AddAppointmentRequest request)
         {
-            var slots = _client.GetSlots(request.Start, request.End);
+            var slots =  await _client.GetSlots(request.Start, request.End);
             return new AddAppointmentResponse();
         }
     }
