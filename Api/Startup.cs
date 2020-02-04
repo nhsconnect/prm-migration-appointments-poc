@@ -28,6 +28,8 @@ namespace Api
             services.AddControllers();
             services.AddScoped<IOrchestrator, MigrationOrchestrator>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<ITokenPayloadBuilder, TokenPayloadBuilder>();
+            services.AddScoped<IEncoder, TokenEncoder>();
             services.AddScoped<ISlotClient, SlotClient>();
             services.AddScoped<ISlotHttpClientWrapper, SlotHttpClientWrapper>();
         }

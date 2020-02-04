@@ -34,7 +34,6 @@ namespace GPConnectAdaptor
         
         public async Task<string> GetAsync(DateTime start, DateTime end)
         {
-
             var temp = _uri
                 .AppendPathSegment("gpconnect-demonstrator/v1/fhir/Slot")
                 .WithHeaders(new
@@ -45,9 +44,7 @@ namespace GPConnectAdaptor
                     Ssp_InteractionID = _sdsInteractionId,
                     Accept = "application/fhir+json"
                 })
-                .WithOAuthBearerToken(
-                    "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.ewogICJpc3MiOiAiaHR0cHM6Ly9vcmFuZ2UudGVzdGxhYi5uaHMudWsvIiwKICAic3ViIjogIjEiLAogICJhdWQiOiAiaHR0cHM6Ly9vcmFuZ2UudGVzdGxhYi5uaHMudWsvZ3Bjb25uZWN0LWRlbW9uc3RyYXRvci92MS9maGlyIiwKICAiZXhwIjogMTU4MDIwNzkwMSwKICAiaWF0IjogMTU4MDIwNzYwMSwKICAicmVhc29uX2Zvcl9yZXF1ZXN0IjogImRpcmVjdGNhcmUiLAogICJyZXF1ZXN0ZWRfc2NvcGUiOiAib3JnYW5pemF0aW9uLyoucmVhZCIsCiAgInJlcXVlc3RpbmdfZGV2aWNlIjogewogICAgInJlc291cmNlVHlwZSI6ICJEZXZpY2UiLAogICAgImlkZW50aWZpZXIiOiBbCiAgICAgIHsKICAgICAgICAic3lzdGVtIjogImh0dHBzOi8vb3JhbmdlLnRlc3RsYWIubmhzLnVrL2dwY29ubmVjdC1kZW1vbnN0cmF0b3IvSWQvbG9jYWwtc3lzdGVtLWluc3RhbmNlLWlkIiwKICAgICAgICAidmFsdWUiOiAiZ3BjZGVtb25zdHJhdG9yLTEtb3JhbmdlIgogICAgICB9CiAgICBdLAogICAgIm1vZGVsIjogIkdQIENvbm5lY3QgRGVtb25zdHJhdG9yIiwKICAgICJ2ZXJzaW9uIjogIjEuMi4zIgogIH0sCiAgInJlcXVlc3Rpbmdfb3JnYW5pemF0aW9uIjogewogICAgInJlc291cmNlVHlwZSI6ICJPcmdhbml6YXRpb24iLAogICAgImlkZW50aWZpZXIiOiBbCiAgICAgIHsKICAgICAgICAic3lzdGVtIjogImh0dHBzOi8vZmhpci5uaHMudWsvSWQvb2RzLW9yZ2FuaXphdGlvbi1jb2RlIiwKICAgICAgICAidmFsdWUiOiAiQTExMTExIgogICAgICB9CiAgICBdLAogICAgIm5hbWUiOiAiQ29uc3VtZXIgb3JnYW5pc2F0aW9uIG5hbWUiCiAgfSwKICAicmVxdWVzdGluZ19wcmFjdGl0aW9uZXIiOiB7CiAgICAicmVzb3VyY2VUeXBlIjogIlByYWN0aXRpb25lciIsCiAgICAiaWQiOiAiMSIsCiAgICAiaWRlbnRpZmllciI6IFsKICAgICAgewogICAgICAgICJzeXN0ZW0iOiAiaHR0cHM6Ly9maGlyLm5ocy51ay9JZC9zZHMtdXNlci1pZCIsCiAgICAgICAgInZhbHVlIjogIjExMTExMTExMTExMSIKICAgICAgfSwKICAgICAgewogICAgICAgICJzeXN0ZW0iOiAiaHR0cHM6Ly9maGlyLm5ocy51ay9JZC9zZHMtcm9sZS1wcm9maWxlLWlkIiwKICAgICAgICAidmFsdWUiOiAiMjIyMjIyMjIyMjIyMjIiCiAgICAgIH0sCiAgICAgIHsKICAgICAgICAic3lzdGVtIjogImh0dHBzOi8vb3JhbmdlLnRlc3RsYWIubmhzLnVrL2dwY29ubmVjdC1kZW1vbnN0cmF0b3IvSWQvbG9jYWwtdXNlci1pZCIsCiAgICAgICAgInZhbHVlIjogIjEiCiAgICAgIH0KICAgIF0sCiAgICAibmFtZSI6IFsKICAgICAgewogICAgICAgICJmYW1pbHkiOiAiRGVtb25zdHJhdG9yIiwKICAgICAgICAiZ2l2ZW4iOiBbCiAgICAgICAgICAiR1BDb25uZWN0IgogICAgICAgIF0sCiAgICAgICAgInByZWZpeCI6IFsKICAgICAgICAgICJEciIKICAgICAgICBdCiAgICAgIH0KICAgIF0KICB9Cn0."
-                    )
+                .WithOAuthBearerToken(_tokenGenerator.GetToken())
                 .SetQueryParams(new
                 {
                     start = $"ge{start:yyyy-MM-dd}",
