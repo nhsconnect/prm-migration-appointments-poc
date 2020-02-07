@@ -7,7 +7,7 @@ namespace GPConnectAdaptor.Models
     {
         public string ResourceType { get; set; }
         public string Id { get; set; }
-        public Meta2 Meta { get; set; }
+        public Meta Meta { get; set; }
         public List<Identifier> Identifier { get; set; }
         public string Name { get; set; }
         public List<Telecom> Telecom { get; set; }

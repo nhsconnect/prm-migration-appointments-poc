@@ -1,16 +1,7 @@
 using System;
-using System.Linq;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Security.Cryptography;
-using System.Text;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
-using Flurl.Http.Configuration;
-using GPConnectAdaptor.Models;
-using Hl7.Fhir.Model;
-using Newtonsoft.Json;
 
 namespace GPConnectAdaptor
 {
@@ -56,17 +47,6 @@ namespace GPConnectAdaptor
                 .SetQueryParam("searchFilter", _searchFilter, false);
 
             return await temp.GetStringAsync();
-        }
-    }
-    
-    
-    
-    public class UntrustedCertClientFactory : DefaultHttpClientFactory
-    {
-        public override HttpMessageHandler CreateMessageHandler() {
-            return new HttpClientHandler {
-                ServerCertificateCustomValidationCallback = (a, b, c, d) => true
-            };
         }
     }
 }

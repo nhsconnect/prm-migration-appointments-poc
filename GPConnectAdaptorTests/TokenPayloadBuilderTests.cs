@@ -15,9 +15,9 @@ namespace GPConnectAdaptorTests
 
         public TokenPayloadBuilderTests()
         {
-            var assembly = typeof(JwtTokenGeneratorTests).GetTypeInfo().Assembly;
+            var assembly = typeof(TokenPayloadBuilderTests).GetTypeInfo().Assembly;
 
-            using (var stream = assembly.GetManifestResourceStream("GPConnectAdaptorTests.TestJwtToken.json"))
+            using (var stream = assembly.GetManifestResourceStream("GPConnectAdaptorTests.TestData.TestJwtToken.json"))
             {
                 using (var reader = new StreamReader(stream))
                 {

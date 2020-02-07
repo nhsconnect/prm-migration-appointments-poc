@@ -16,4 +16,9 @@
       </Reference>
     </ItemGroup>
 
+    <ItemGroup>
+      <None Remove="Templates\AddAppointmentRequestTemplate.json" />
+      <EmbeddedResource Include="Templates\AddAppointmentRequestTemplate.json" />
+    </ItemGroup>
+
 </Project>

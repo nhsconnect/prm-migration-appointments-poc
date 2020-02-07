@@ -24,10 +24,11 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddAppointment([FromBody] AddAppointmentRequest request)
+        public async Task<JsonResult> AddAppointment([FromBody] TempAddAppointmentRequest request)
         {
-            var response = await _orchestrator.Orchestrate(request);
-            return new JsonResult(response);
+            var slotInfo = await  _orchestrator.GetSlotInfo(request);
+            var appointment = _orchestrator.AddAppointment(slotInfo);
+            return new JsonResult(appointment);
         }
     }
 }

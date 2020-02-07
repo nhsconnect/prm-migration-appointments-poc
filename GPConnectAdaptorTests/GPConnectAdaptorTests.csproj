@@ -21,7 +21,17 @@
 
     <ItemGroup>
       <None Remove="TestJwtToken.json" />
-      <EmbeddedResource Include="TestJwtToken.json" />
+      <EmbeddedResource Include="TestData\AddAppointment\TestAddAppointmentRequest.json" />
+      <EmbeddedResource Include="TestData\TestJwtToken.json" />
+      <EmbeddedResource Include="TestData\TestSlotResponse.json" />
+      <None Remove="TestSlotResponse.json" />
+      <None Remove="TestData\TestAddAppointmentRequest.json" />
+      <None Remove="TestData\AddAppointment\AppointmentResponse.json" />
+      <EmbeddedResource Include="TestData\AddAppointment\AppointmentResponse.json" />
+      <None Remove="TestData\AddAppointment\FailedAppointmentResponse.json" />
+      <EmbeddedResource Include="TestData\AddAppointment\FailedAppointmentResponse.json" />
+      <None Remove="TestData\TestSlotResponse2.json" />
+      <EmbeddedResource Include="TestData\TestSlotResponse2.json" />
     </ItemGroup>
 
 </Project>
