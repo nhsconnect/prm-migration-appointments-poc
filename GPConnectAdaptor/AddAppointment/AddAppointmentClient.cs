@@ -2,9 +2,8 @@ using System;
 using System.Threading.Tasks;
 using GPConnectAdaptor.Models.AddAppointment;
 using Newtonsoft.Json;
-using AppointmentResponse = Hl7.Fhir.Model.AppointmentResponse;
 
-namespace GPConnectAdaptor
+namespace GPConnectAdaptor.AddAppointment
 {
     public class AddAppointmentClient : IAddAppointmentClient
     {

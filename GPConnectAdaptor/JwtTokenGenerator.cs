@@ -21,7 +21,7 @@ namespace GPConnectAdaptor
 	    public string GetToken()
         {
 	        var jwt = _tokenPayloadBuilder.BuildPayload();
-	        var jsonPayload = JsonConvert.SerializeObject(jwt);
+	        var jsonPayload = JsonConvert.SerializeObject(jwt, Formatting.Indented);
 	        var token = _encoder.Encode(jsonPayload);
 
 	        return token;

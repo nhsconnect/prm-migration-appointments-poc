@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using FluentAssertions;
 using GPConnectAdaptor;
+using GPConnectAdaptor.AddAppointment;
 using GPConnectAdaptor.Models;
 using GPConnectAdaptor.Models.AddAppointment;
 using Newtonsoft.Json;
@@ -124,7 +125,7 @@ namespace GPConnectAdaptorTests
                 new DateTime(2020, 02, 05, 10, 20, 00));
 
             result.Should().NotBeNull();
-            result.Result.resourceType.Should().BeEquivalentTo("OperationalOutcome");
+            result.Result.resourceType.Should().BeEquivalentTo("OperationOutcome");
         }
     }
 }

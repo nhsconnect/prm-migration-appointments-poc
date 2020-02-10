@@ -5,6 +5,7 @@ using Xunit;
 using FluentAssertions;
 using GPConnectAdaptor;
 using GPConnectAdaptor.Models;
+using GPConnectAdaptor.Models.Jwt;
 using Newtonsoft.Json;
 
 namespace GPConnectAdaptorTests

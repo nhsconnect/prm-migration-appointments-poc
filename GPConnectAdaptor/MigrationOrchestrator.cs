@@ -7,10 +7,10 @@ namespace GPConnectAdaptor
 {
     public class MigrationOrchestrator : IOrchestrator
     {
-        private readonly ISlotClient _slotClient;
+        private readonly Slots.ISlotClient _slotClient;
         private readonly IAddAppointmentClient _addAppointmentClient;
 
-        public MigrationOrchestrator(ISlotClient slotClient, IAddAppointmentClient addAppointmentClient)
+        public MigrationOrchestrator(Slots.ISlotClient slotClient, IAddAppointmentClient addAppointmentClient)
         {
             _slotClient = slotClient;
             _addAppointmentClient = addAppointmentClient;
@@ -47,26 +47,26 @@ namespace GPConnectAdaptor
         public async Task<AddAppointmentCriteria> GetSlotInfo(TempAddAppointmentRequest request)
         {
             var slotResponse =  await _slotClient.GetSlots(request.Start, request.End);
-            var slot = slotResponse.Entry
-                .Select(e => e.Resource)
-                .Where(r => r.ResourceType == "Slot")
-                .First(s => s.Start >= request.Start && s.End <= request.End);
+            var slot = slotResponse.entry
+                .Select(e => e.resource)
+                .Where(r => r.resourceType == "Slot")
+                .First(s => s.start >= request.Start && s.end <= request.End);
 
-            var scheduleId = slot.Schedule.Reference.Substring(9);
+            var scheduleId = slot.schedule.reference.Substring(9);
 
-            var locationId = slotResponse.Entry.Select(e => e.Resource)
-                .Where(r => r.ResourceType == "Schedule")
-                .First(s => s.Id == scheduleId)
-                .Actor.First(a => a.Reference.StartsWith("Location/")).Reference;
+            var locationId = slotResponse.entry.Select(e => e.resource)
+                .Where(r => r.resourceType == "Schedule")
+                .First(s => s.id == scheduleId)
+                .actor.First(a => a.reference.StartsWith("Location/")).reference;
 
 
             return new AddAppointmentCriteria()
             {
                 PatientId = request.PatientId,
                 LocationId = locationId,
-                SlotReference = slot.Id,
-                Start = slot.Start ?? new DateTime(),
-                End = slot.End ?? new DateTime()
+                SlotReference = slot.id,
+                Start = slot.start ?? new DateTime(),
+                End = slot.end ?? new DateTime()
             };
         }
     }

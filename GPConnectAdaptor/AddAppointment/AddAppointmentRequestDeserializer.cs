@@ -1,8 +1,7 @@
-using System;
 using GPConnectAdaptor.Models.AddAppointment;
 using Newtonsoft.Json;
 
-namespace GPConnectAdaptor
+namespace GPConnectAdaptor.AddAppointment
 {
     public class AddAppointmentRequestDeserializer : IAddAppointmentRequestDeserializer
     {

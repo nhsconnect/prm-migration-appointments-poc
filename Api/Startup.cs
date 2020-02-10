@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using GPConnectAdaptor;
+using GPConnectAdaptor.AddAppointment;
+using GPConnectAdaptor.Slots;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -33,6 +35,7 @@ namespace Api
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();
             services.AddScoped<ITokenPayloadBuilder, TokenPayloadBuilder>();
             services.AddScoped<IEncoder, TokenEncoder>();
+            services.AddScoped<IDateTimeGenerator, DateTimeGenerator>();
             
             // slots
             services.AddScoped<ISlotClient, SlotClient>();

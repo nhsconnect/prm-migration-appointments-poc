@@ -1,6 +1,11 @@
 using System;
 using System.Collections.Generic;
 using GPConnectAdaptor.Models;
+using GPConnectAdaptor.Models.Jwt;
+using GPConnectAdaptor.Models.Slot;
+using Identifier = GPConnectAdaptor.Models.Jwt.Identifier;
+using JwtModel = GPConnectAdaptor.Models.Jwt.JwtModel;
+using Name = GPConnectAdaptor.Models.Jwt.Name;
 
 namespace GPConnectAdaptor
 {
@@ -13,11 +18,11 @@ namespace GPConnectAdaptor
                 iss = "https://orange.testlab.nhs.uk/",
                 sub = "1",
                 aud = "https://orange.testlab.nhs.uk/gpconnect-demonstrator/v1/fhir",
-                exp = (int)(DateTime.UtcNow.AddMinutes(5) - new DateTime(1970, 1, 1)).TotalSeconds,
+                exp = (int)(DateTime.UtcNow.AddMinutes(5) - new DateTime(1970, 1, 1)).TotalSeconds, //Epoch time
                 iat = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds,
                 reason_for_request = "directcare",
                 requested_scope = "organization/*.read",
-                requesting_device = new RequestingDevice()
+                requesting_device = new Models.Jwt.RequestingDevice()
                 {
                     resourceType = "Device",
                     identifier = new List<Identifier>()
@@ -28,10 +33,10 @@ namespace GPConnectAdaptor
                             value = "gpcdemonstrator-1-orange"
                         }
                     },
-                    model = "GP Connect Demonstrator",
+                    model  = "GP Connect Demonstrator",
                     version = "1.2.3"
                 },
-                requesting_organization = new RequestingOrganization()
+                requesting_organization = new Models.Jwt.RequestingOrganization()
                 {
                     resourceType = "Organization",
                     identifier = new List<Identifier>()
@@ -44,7 +49,7 @@ namespace GPConnectAdaptor
                     },
                     name = "Consumer organisation name"
                 },
-                requesting_practitioner = new RequestingPractitioner()
+                requesting_practitioner = new Models.Jwt.RequestingPractitioner()
                 {
                     resourceType = "Practitioner",
                     id = "1",
@@ -66,9 +71,9 @@ namespace GPConnectAdaptor
                             value = "1"
                         }
                     },
-                    name = new List<Name>()
+                    name = new List<Models.Jwt.Name>()
                     {
-                        new Name()
+                        new Models.Jwt.Name()
                         {
                             family = "Demonstrator",
                             given = new List<string>()

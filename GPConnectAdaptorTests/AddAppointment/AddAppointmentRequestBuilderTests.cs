@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using FluentAssertions;
 using GPConnectAdaptor;
+using GPConnectAdaptor.AddAppointment;
 using GPConnectAdaptor.Models.AddAppointment;
 using NSubstitute;
 using Xunit;
@@ -28,8 +29,8 @@ namespace GPConnectAdaptorTests
             result.end.Should().BeCloseTo(end, new TimeSpan(0, 0, 0, 10));
             result.created.Should().BeCloseTo(DateTime.Now, new TimeSpan(0, 0, 0, 10));
             result.slot[0].reference.Should().BeEquivalentTo("Slot/1");
-            result.participant.Count(p => p.actor.Reference == "Patient/2").Should().Be(1);
-            result.participant.Count(p => p.actor.Reference == "Location/1").Should().Be(1);
+            result.participant.Count(p => p.actor.reference == "Patient/2").Should().Be(1);
+            result.participant.Count(p => p.actor.reference == "Location/1").Should().Be(1);
         }
     }
 }

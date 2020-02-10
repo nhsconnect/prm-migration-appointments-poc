@@ -13,12 +13,8 @@ namespace GPConnectAdaptorTests
     {
         private HttpTest _httpTest;
         private readonly ITestOutputHelper _output;
-        private readonly string _expectedUri = "https://orange.testlab.nhs.uk/gpconnect-demonstrator/v1/fhir/" +
-                                               "Slot?start=ge2020-01-21&end=le2020-01-25&status=" +
-                                               "free&_include=Slot%3Aschedule&_include%3Arecurse=" +
-                                               "Schedule%3Aactor%3APractitioner&searchFilter=" +
-                                               "https%3A%2F%2Ffhir.nhs.uk" +
-                                               "%2FSTU3%2FCodeSystem%2FGPConnect-OrganisationType-1%7Cgp-practice";
+        private readonly string _expectedUri =
+            "https://orange.testlab.nhs.uk/gpconnect-demonstrator/v1/fhir/Slot?start=ge2020-02-08T10%3A00%3A00%2B00%3A00&end=le2020-02-08T10%3A10%3A00%2B00%3A00&status=free&_include=Slot%3Aschedule&_include%3Arecurse=Schedule%3Aactor%3APractitioner&searchFilter=https%3A%2F%2Ffhir.nhs.uk%2FSTU3%2FCodeSystem%2FGPConnect-OrganisationType-1%7Cgp-practice";
 
         public SlotHttpClientWrapperTests(ITestOutputHelper output)
         {
@@ -34,9 +30,9 @@ namespace GPConnectAdaptorTests
             mockTokenGenerator.GetToken().Returns("token");
             
             _httpTest.RespondWith("abcd");
-            var start = new DateTime(2020, 01, 21);
-            var end = new DateTime(2020, 01, 25);
-            var sut = new SlotHttpClientWrapper(mockTokenGenerator);
+            var start = new DateTime(2020, 02, 08, 10, 00, 00);
+            var end = new DateTime(2020, 02, 08, 10, 10, 00);
+            var sut = new SlotHttpClientWrapper(mockTokenGenerator, new DateTimeGenerator());
 
             var result = await sut.GetAsync(start, end);
 

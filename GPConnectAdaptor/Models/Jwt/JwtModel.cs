@@ -1,5 +1,43 @@
-namespace GPConnectAdaptor.Models
+using System.Collections.Generic;
+
+namespace GPConnectAdaptor.Models.Jwt
 {
+    public class Identifier
+    {
+        public string system { get; set; }
+        public string value { get; set; }
+    }
+
+    public class RequestingDevice
+    {
+        public string resourceType { get; set; }
+        public List<Identifier> identifier { get; set; }
+        public string model { get; set; }
+        public string version { get; set; }
+    }
+
+    public class RequestingOrganization
+    {
+        public string resourceType { get; set; }
+        public List<Identifier> identifier { get; set; }
+        public string name { get; set; }
+    }
+
+    public class Name
+    {
+        public string family { get; set; }
+        public List<string> given { get; set; }
+        public List<string> prefix { get; set; }
+    }
+
+    public class RequestingPractitioner
+    {
+        public string resourceType { get; set; }
+        public string id { get; set; }
+        public List<Identifier> identifier { get; set; }
+        public List<Name> name { get; set; }
+    }
+
     public class JwtModel
     {
         public string iss { get; set; }

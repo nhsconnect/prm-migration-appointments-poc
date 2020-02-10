@@ -2,6 +2,7 @@ using System.IO;
 using System.Reflection;
 using FluentAssertions;
 using GPConnectAdaptor;
+using GPConnectAdaptor.AddAppointment;
 using Xunit;
 
 namespace GPConnectAdaptorTests

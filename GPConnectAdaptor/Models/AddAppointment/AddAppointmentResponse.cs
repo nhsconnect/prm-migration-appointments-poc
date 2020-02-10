@@ -3,6 +3,18 @@ using System.Collections.Generic;
 
 namespace GPConnectAdaptor.Models.AddAppointment
 {
+        public class Coding
+    {
+        public string system { get; set; }
+        public string code { get; set; }
+        public string display { get; set; }
+    }
+
+    public class ValueCodeableConcept
+    {
+        public List<Coding> coding { get; set; }
+    }
+
     public class AddAppointmentResponse
     {
         public string resourceType { get; set; }
@@ -16,22 +28,9 @@ namespace GPConnectAdaptor.Models.AddAppointment
         public DateTime start { get; set; }
         public DateTime end { get; set; }
         public int minutesDuration { get; set; }
-        public List<Hl7.Fhir.Model.Slot> slot { get; set; }
+        public List<Slot> slot { get; set; }
         public DateTime created { get; set; }
         public List<Participant> participant { get; set; }
-        public List<Issue> issue { get; set; }
-    }
-    
-    public class Details
-    {
-        public List<Coding> coding { get; set; }
     }
 
-    public class Issue
-    {
-        public string severity { get; set; }
-        public string code { get; set; }
-        public Details details { get; set; }
-        public string diagnostics { get; set; }
-    }
 }

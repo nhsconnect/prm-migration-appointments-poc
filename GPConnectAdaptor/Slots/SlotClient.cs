@@ -1,16 +1,15 @@
 using System;
-using System.Net;
 using System.Threading.Tasks;
-using GPConnectAdaptor.Models;
+using GPConnectAdaptor.Models.Slot;
 
-namespace GPConnectAdaptor
+namespace GPConnectAdaptor.Slots
 {
-    public class SlotClient : ISlotClient
+    public class SlotClient : Slots.ISlotClient
     {
         private readonly ISlotHttpClientWrapper _clientWrapper;
-        private readonly ISlotResponseDeserializer _deserializer;
+        private readonly Slots.ISlotResponseDeserializer _deserializer;
 
-        public SlotClient(ISlotHttpClientWrapper clientWrapper, ISlotResponseDeserializer deserializer)
+        public SlotClient(ISlotHttpClientWrapper clientWrapper, Slots.ISlotResponseDeserializer deserializer)
         {
             _clientWrapper = clientWrapper;
             _deserializer = deserializer;

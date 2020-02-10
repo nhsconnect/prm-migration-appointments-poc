@@ -1,9 +1,10 @@
 using GPConnectAdaptor.Models;
+using GPConnectAdaptor.Models.Slot;
 using Newtonsoft.Json;
 
-namespace GPConnectAdaptor
+namespace GPConnectAdaptor.Slots
 {
-    public class SlotResponseDeserializer : ISlotResponseDeserializer
+    public class SlotResponseDeserializer : Slots.ISlotResponseDeserializer
     {
         public SlotResponse Deserialize(string response)
         {

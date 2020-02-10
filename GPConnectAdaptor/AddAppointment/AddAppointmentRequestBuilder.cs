@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
-using GPConnectAdaptor.Models;
 using GPConnectAdaptor.Models.AddAppointment;
 
-namespace GPConnectAdaptor
+namespace GPConnectAdaptor.AddAppointment
 {
     public class AddAppointmentRequestBuilder : IAddAppointmentRequestBuilder
     {
@@ -38,12 +37,12 @@ namespace GPConnectAdaptor
             baseRequest.participant = new List<Participant>();
             baseRequest.participant.Add(new Participant()
             {
-                actor = new Actor(){Reference = "Patient/" + patientRef},
+                actor = new Actor(){reference = "Patient/" + patientRef},
                 status = "accepted"
             });
             baseRequest.participant.Add(new Participant()
             {
-                actor = new Actor(){Reference = "Location/" + locationRef},
+                actor = new Actor(){reference = "Location/" + locationRef},
                 status = "accepted"
             });
 

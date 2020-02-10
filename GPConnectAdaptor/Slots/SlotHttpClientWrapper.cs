@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
@@ -15,10 +16,12 @@ namespace GPConnectAdaptor
         private readonly string _providerAsid = "918999198993";
         private readonly string _sdsInteractionId = "urn:nhs:names:services:gpconnect:fhir:rest:search:slot-1";
         private readonly IJwtTokenGenerator _tokenGenerator;
+        private readonly IDateTimeGenerator _dateTimeGenerator;
 
-        public SlotHttpClientWrapper(IJwtTokenGenerator tokenGenerator)
+        public SlotHttpClientWrapper(IJwtTokenGenerator tokenGenerator, IDateTimeGenerator dateTimeGenerator)
         {
             _tokenGenerator = tokenGenerator;
+            _dateTimeGenerator = dateTimeGenerator;
             FlurlHttp.ConfigureClient(_uri, cli =>
                 cli.Settings.HttpClientFactory = new UntrustedCertClientFactory());
         }
@@ -38,8 +41,8 @@ namespace GPConnectAdaptor
                 .WithOAuthBearerToken(_tokenGenerator.GetToken())
                 .SetQueryParams(new
                 {
-                    start = $"ge{start:yyyy-MM-dd}",
-                    end = $"le{end:yyyy-MM-dd}",
+                    start = "ge"+_dateTimeGenerator.Generate(start),
+                    end = "le"+_dateTimeGenerator.Generate(end),
                     status = "free",
                     _include = "Slot:schedule"
                 })
@@ -47,6 +50,19 @@ namespace GPConnectAdaptor
                 .SetQueryParam("searchFilter", _searchFilter, false);
 
             return await temp.GetStringAsync();
+        }
+    }
+
+    public interface IDateTimeGenerator
+    {
+        string Generate(DateTime dateTime);
+    }
+
+    public class DateTimeGenerator : IDateTimeGenerator
+    {
+        public string Generate(DateTime dateTime)
+        {
+            return (dateTime.ToString("s") + "+" + TimeZoneInfo.Local.BaseUtcOffset).Substring(0, 25);
         }
     }
 }
