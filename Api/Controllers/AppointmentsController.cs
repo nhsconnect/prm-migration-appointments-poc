@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GPConnectAdaptor;
 using GPConnectAdaptor.Models;
+using GPConnectAdaptor.Models.AddAppointment;
 
 namespace Api.Controllers
 {
@@ -24,11 +25,11 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<JsonResult> AddAppointment([FromBody] TempAddAppointmentRequest request)
+        public async Task<AddAppointmentResponse> AddAppointment([FromBody] TempAddAppointmentRequest request)
         {
-            var slotInfo = await  _orchestrator.GetSlotInfo(request);
-            var appointment = _orchestrator.AddAppointment(slotInfo);
-            return new JsonResult(appointment);
+            var slotInfo = _orchestrator.GetSlotInfo(request);
+            var appointment = _orchestrator.AddAppointment(await slotInfo);
+            return await appointment;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace GPConnectAdaptor
 {
     public class TokenPayloadBuilder : ITokenPayloadBuilder
     {
-        public JwtModel BuildPayload()
+        public JwtModel BuildPayload(Scope scope)
         {
             return new JwtModel()
             {
@@ -21,7 +21,7 @@ namespace GPConnectAdaptor
                 exp = (int)(DateTime.UtcNow.AddMinutes(5) - new DateTime(1970, 1, 1)).TotalSeconds, //Epoch time
                 iat = (int)(DateTime.UtcNow - new DateTime(1970, 1, 1)).TotalSeconds,
                 reason_for_request = "directcare",
-                requested_scope = "organization/*.read",
+                requested_scope = scope == Scope.OrgRead ? "organization/*.read" : "patient/*.write",
                 requesting_device = new Models.Jwt.RequestingDevice()
                 {
                     resourceType = "Device",
@@ -89,5 +89,11 @@ namespace GPConnectAdaptor
                 }
             };
         }
+    }
+
+    public enum Scope
+    {
+        OrgRead,
+        PatientWrite
     }
 }

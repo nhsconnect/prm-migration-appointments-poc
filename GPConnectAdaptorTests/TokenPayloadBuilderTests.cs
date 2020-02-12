@@ -33,14 +33,32 @@ namespace GPConnectAdaptorTests
             var sut = new TokenPayloadBuilder();
 
             var expected = JsonConvert.DeserializeObject<JwtModel>(_file);
+            expected.requested_scope = "organization/*.read";
 
-            var result = sut.BuildPayload();
+            var result = sut.BuildPayload(Scope.OrgRead);
 
             //Exceptions for initial and expiry times
             expected.exp = result.exp;
             expected.iat = result.iat;
             
             result.Should().BeEquivalentTo(expected);
-        } 
+        }
+
+        [Fact]
+        public void BuildPayload_WhenBookingAppointment_ChangesRequestedScope()
+        {
+            var sut = new TokenPayloadBuilder();
+
+            var expected = JsonConvert.DeserializeObject<JwtModel>(_file);
+            expected.requested_scope = "patient/*.write";
+            
+            var result = sut.BuildPayload(Scope.PatientWrite);
+
+            //Exceptions for initial and expiry times
+            expected.exp = result.exp;
+            expected.iat = result.iat;
+            
+            result.Should().BeEquivalentTo(expected);
+        }
     }
 }

@@ -31,7 +31,7 @@ namespace GPConnectAdaptorTests
         public async void PostAsync_MakesCorrectRequest()
         {
             var mockTokenGenerator = Substitute.For<IJwtTokenGenerator>();
-            mockTokenGenerator.GetToken().Returns("token");
+            mockTokenGenerator.GetToken(Scope.PatientWrite).Returns("token");
             var mockRequestBody = "{\"hello\" : \"hello\"}";
             _httpTest.RespondWith("{\"aha!\" : \"aha!\"}");
 

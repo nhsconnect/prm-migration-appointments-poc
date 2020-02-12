@@ -50,7 +50,9 @@ namespace GPConnectAdaptor
             var slot = slotResponse.entry
                 .Select(e => e.resource)
                 .Where(r => r.resourceType == "Slot")
-                .First(s => s.start >= request.Start && s.end <= request.End);
+                .First(s => 
+                    s.start >= request.Start.Subtract(new TimeSpan(0,0,1)) && 
+                    s.end <= request.End.AddSeconds(1));
 
             var scheduleId = slot.schedule.reference.Substring(9);
 

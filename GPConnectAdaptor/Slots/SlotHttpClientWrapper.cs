@@ -1,10 +1,9 @@
 using System;
-using System.Globalization;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
 
-namespace GPConnectAdaptor
+namespace GPConnectAdaptor.Slots
 {
     public class SlotHttpClientWrapper : ISlotHttpClientWrapper
     {
@@ -38,7 +37,7 @@ namespace GPConnectAdaptor
                     Ssp_InteractionID = _sdsInteractionId,
                     Accept = "application/fhir+json"
                 })
-                .WithOAuthBearerToken(_tokenGenerator.GetToken())
+                .WithOAuthBearerToken(_tokenGenerator.GetToken(Scope.OrgRead))
                 .SetQueryParams(new
                 {
                     start = "ge"+_dateTimeGenerator.Generate(start),

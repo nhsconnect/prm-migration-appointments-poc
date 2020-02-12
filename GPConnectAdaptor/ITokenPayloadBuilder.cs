@@ -6,6 +6,6 @@ namespace GPConnectAdaptor
 {
     public interface ITokenPayloadBuilder
     {
-        JwtModel BuildPayload();
+        JwtModel BuildPayload(Scope scope);
     }
 }

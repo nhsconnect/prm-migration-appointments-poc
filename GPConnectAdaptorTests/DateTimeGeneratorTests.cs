@@ -1,6 +1,7 @@
 using System;
 using FluentAssertions;
 using GPConnectAdaptor;
+using GPConnectAdaptor.Slots;
 using Xunit;
 
 namespace GPConnectAdaptorTests

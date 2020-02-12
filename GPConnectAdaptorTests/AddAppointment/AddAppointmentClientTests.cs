@@ -63,7 +63,7 @@ namespace GPConnectAdaptorTests
         public void AddAppointment_WhenAppointmentAvailable_BooksAppointment()
         {
             var mockTokenGenerator = Substitute.For<IJwtTokenGenerator>();
-            mockTokenGenerator.GetToken().Returns("token");
+            mockTokenGenerator.GetToken(Scope.PatientWrite).Returns("token");
 
             var mockRequestBuilder = Substitute.For<IAddAppointmentRequestBuilder>();
             mockRequestBuilder
@@ -98,7 +98,7 @@ namespace GPConnectAdaptorTests
         public void AddAppointment_WhenAppointmentNotAvailable_ReturnsOutcome()
         {
             var mockTokenGenerator = Substitute.For<IJwtTokenGenerator>();
-            mockTokenGenerator.GetToken().Returns("token");
+            mockTokenGenerator.GetToken(Scope.PatientWrite).Returns("token");
 
             var mockRequestBuilder = Substitute.For<IAddAppointmentRequestBuilder>();
             mockRequestBuilder

@@ -1,3 +1,5 @@
+using Microsoft.IdentityModel.Tokens;
+
 namespace GPConnectAdaptor
 {
     public class TokenEncoder : IEncoder
@@ -11,7 +13,7 @@ namespace GPConnectAdaptor
         public string Encode(string payload)
         {
             var bytes = System.Text.Encoding.UTF8.GetBytes(payload);
-            var encodedPayload =  System.Convert.ToBase64String(bytes);
+            var encodedPayload =  Base64UrlEncoder.Encode(bytes);
 
             return _header + "." + encodedPayload + ".";
         }

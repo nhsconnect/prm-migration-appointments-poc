@@ -2,6 +2,6 @@ namespace GPConnectAdaptor
 {
     public interface IJwtTokenGenerator
     {
-        string GetToken();
+        string GetToken(Scope scope);
     }
 }

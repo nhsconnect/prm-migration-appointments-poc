@@ -4,6 +4,7 @@ using System.Linq;
 using System.Reflection;
 using FluentAssertions;
 using GPConnectAdaptor;
+using GPConnectAdaptor.AddAppointment;
 using Xunit;
 
 namespace GPConnectAdaptorTests
@@ -13,6 +14,8 @@ namespace GPConnectAdaptorTests
         private readonly string _appointmentSuccessPath =
             "GPConnectAdaptorTests.TestData.AddAppointment.AppointmentResponse.json";
         private readonly string _appointmentFailPath =
+            "GPConnectAdaptorTests.TestData.AddAppointment.FailedAppointmentResponse.json";
+        private readonly string _jwtFailureAppointmentResponse = 
             "GPConnectAdaptorTests.TestData.AddAppointment.FailedAppointmentResponse.json";
         private Dictionary<string, string> _filePaths;
         private readonly Dictionary<string, string> _files = new Dictionary<string, string>();
@@ -33,6 +36,7 @@ namespace GPConnectAdaptorTests
             var result = sut.Deserialize(response);
 
             result.Should().NotBeNull();
+            result.resourceType.Should().BeEquivalentTo("Appointment");
 
         }
         
@@ -46,6 +50,21 @@ namespace GPConnectAdaptorTests
             var result = sut.Deserialize(response);
 
             result.Should().NotBeNull();
+            result.resourceType.Should().BeEquivalentTo("OperationOutcome");
+
+        }
+        
+        [Fact]
+        public void Deserialize_WhenJwtFails_ParsesIntoAppointmentResponse()
+        {
+            var response = _files["fail"];
+            
+            var sut = new AddAppointmentResponseDeserializer();
+
+            var result = sut.Deserialize(response);
+
+            result.Should().NotBeNull();
+            result.resourceType.Should().BeEquivalentTo("OperationOutcome");
 
         }
         
@@ -58,6 +77,9 @@ namespace GPConnectAdaptorTests
                 },
                 {
                     "fail", _appointmentFailPath
+                },
+                {
+                    "jwtFail", _jwtFailureAppointmentResponse
                 }
             };
         }

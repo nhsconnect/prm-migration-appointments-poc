@@ -1,13 +1,14 @@
 using System;
 using System.Threading.Tasks;
 using FluentAssertions;
-using Xunit;
 using Flurl.Http.Testing;
 using GPConnectAdaptor;
+using GPConnectAdaptor.Slots;
 using NSubstitute;
+using Xunit;
 using Xunit.Abstractions;
 
-namespace GPConnectAdaptorTests
+namespace GPConnectAdaptorTests.Slots
 {
     public class SlotHttpClientWrapperTests
     {
@@ -27,7 +28,7 @@ namespace GPConnectAdaptorTests
         public async Task GetAsync_MakesCorrectCall()
         {
             var mockTokenGenerator = Substitute.For<IJwtTokenGenerator>();
-            mockTokenGenerator.GetToken().Returns("token");
+            mockTokenGenerator.GetToken(Scope.OrgRead).Returns("token");
             
             _httpTest.RespondWith("abcd");
             var start = new DateTime(2020, 02, 08, 10, 00, 00);

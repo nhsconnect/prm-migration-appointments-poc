@@ -28,8 +28,10 @@ namespace Api
         public void ConfigureServices(IServiceCollection services)
         {
             // controllers
-            services.AddControllers();
-            
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             // common
             services.AddScoped<IOrchestrator, MigrationOrchestrator>();
             services.AddScoped<IJwtTokenGenerator, JwtTokenGenerator>();

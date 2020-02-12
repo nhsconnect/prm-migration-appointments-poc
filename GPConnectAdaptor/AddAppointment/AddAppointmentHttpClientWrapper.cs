@@ -38,9 +38,9 @@ namespace GPConnectAdaptor
                     Content_Type = "application/fhir+json"
                     
                 })
-                .WithOAuthBearerToken(_tokenGenerator.GetToken());
+                .WithOAuthBearerToken(_tokenGenerator.GetToken(Scope.PatientWrite));
 
-            return await temp.PostStringAsync(requestBody).ReceiveString();
+            return await temp.AllowAnyHttpStatus().PostStringAsync(requestBody).ReceiveString();
         }
     }
 }

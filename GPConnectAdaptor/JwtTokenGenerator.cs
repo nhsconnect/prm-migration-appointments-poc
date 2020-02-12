@@ -18,9 +18,9 @@ namespace GPConnectAdaptor
 		    _tokenPayloadBuilder = tokenPayloadBuilder;
 	    }
 
-	    public string GetToken()
+	    public string GetToken(Scope scope)
         {
-	        var jwt = _tokenPayloadBuilder.BuildPayload();
+	        var jwt = _tokenPayloadBuilder.BuildPayload(scope);
 	        var jsonPayload = JsonConvert.SerializeObject(jwt, Formatting.Indented);
 	        var token = _encoder.Encode(jsonPayload);
 
