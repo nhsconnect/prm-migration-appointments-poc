@@ -1,12 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Flurl.Http;
+using Flurl.Http.Testing;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using GPConnectAdaptor;
 using GPConnectAdaptor.Models;
 using GPConnectAdaptor.Models.AddAppointment;
+using Microsoft.AspNetCore.Server.HttpSys;
 
 namespace Api.Controllers
 {
@@ -25,11 +30,12 @@ namespace Api.Controllers
         }
 
         [HttpPost]
-        public async Task<AddAppointmentResponse> AddAppointment([FromBody] TempAddAppointmentRequest request)
+        public async Task<IActionResult> AddAppointment([FromBody] TempAddAppointmentRequest request)
         {
             var slotInfo = _orchestrator.GetSlotInfo(request);
-            var appointment = _orchestrator.AddAppointment(await slotInfo);
-            return await appointment;
+
+            var appointment = await _orchestrator.AddAppointment(await slotInfo);
+            return new JsonResult(appointment);
         }
     }
 }

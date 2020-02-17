@@ -15,7 +15,7 @@ namespace GPConnectAdaptorTests
         { 
             var assembly = typeof(AddAppointmentRequestDeserializerTests).GetTypeInfo().Assembly;
             
-            using (var stream = assembly.GetManifestResourceStream("GPConnectAdaptorTests.TestData.AddAppointment.TestAddAppointmentRequest.json"))
+            using (var stream = assembly.GetManifestResourceStream("GPConnectAdaptorTests.TestData.AddAppointmentTestData.TestAddAppointmentRequest.json"))
             {
                 using (var reader = new StreamReader(stream))
                 {

@@ -7,8 +7,6 @@ namespace GPConnectAdaptor
 {
     public interface IOrchestrator
     {
-        Task<AddAppointmentResponse> Orchestrate(TempAddAppointmentRequest request);
-
         Task<AddAppointmentResponse> AddAppointment(AddAppointmentCriteria criteria);
         Task<AddAppointmentCriteria> GetSlotInfo(TempAddAppointmentRequest request);
     }

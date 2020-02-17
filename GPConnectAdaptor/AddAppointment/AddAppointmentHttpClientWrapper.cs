@@ -10,7 +10,7 @@ namespace GPConnectAdaptor
 {
     public class AddAppointmentHttpClientWrapper : IAddAppointmentHttpClientWrapper
     {
-        private readonly string _uri = "https://orange.testlab.nhs.uk/";
+        private readonly string _uri = "http://localhost:9000/";
         private readonly string _traceId = "09a01679-2564-0fb4-5129-aecc81ea2706";
         private readonly string _consumerAsid = "200000000359";
         private readonly string _providerAsid = "918999198993";

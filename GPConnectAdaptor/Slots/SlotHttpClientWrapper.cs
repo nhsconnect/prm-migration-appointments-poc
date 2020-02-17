@@ -1,13 +1,17 @@
 using System;
+using System.Collections.Generic;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace GPConnectAdaptor.Slots
 {
     public class SlotHttpClientWrapper : ISlotHttpClientWrapper
     {
-        private readonly string _uri = "https://orange.testlab.nhs.uk/";
+        private readonly string _uri = "http://localhost:9000/";
         private readonly string _searchFilter =
             "https://fhir.nhs.uk/STU3/CodeSystem/GPConnect-OrganisationType-1|gp-practice";
         private readonly string _traceId = "09a01679-2564-0fb4-5129-aecc81ea2706";
@@ -27,7 +31,31 @@ namespace GPConnectAdaptor.Slots
         
         public async Task<string> GetAsync(DateTime start, DateTime end)
         {
-            var temp = _uri
+            var client = SetHeadersAndQueryParam(start, end);
+
+            try
+            {
+                return await client.GetStringAsync();
+            }
+            catch (FlurlHttpException f)
+            {
+                dynamic obj = await f.Call.Response.GetJsonAsync();
+                var dict = (IDictionary<string, object>)obj;
+                if (dict["resourceType"].Equals("OperationOutcome"))
+                {
+                    var issue = (IList<object>) dict["issue"];
+                    var parsedIssue = (IDictionary<string, object>) issue[0];
+                    throw new Exception($"Unable to get slots. Call failed with '{parsedIssue["diagnostics"].ToString()}'");
+                }
+                
+                throw new Exception($"Unable to receive Slots. Unidentified Error");
+            }
+            
+        }
+
+        private IFlurlRequest SetHeadersAndQueryParam(DateTime start, DateTime end)
+        {
+            return _uri
                 .AppendPathSegment("gpconnect-demonstrator/v1/fhir/Slot")
                 .WithHeaders(new
                 {
@@ -47,21 +75,6 @@ namespace GPConnectAdaptor.Slots
                 })
                 .SetQueryParam(Url.Encode("_include:recurse"), "Schedule:actor:Practitioner", false)
                 .SetQueryParam("searchFilter", _searchFilter, false);
-
-            return await temp.GetStringAsync();
-        }
-    }
-
-    public interface IDateTimeGenerator
-    {
-        string Generate(DateTime dateTime);
-    }
-
-    public class DateTimeGenerator : IDateTimeGenerator
-    {
-        public string Generate(DateTime dateTime)
-        {
-            return (dateTime.ToString("s") + "+" + TimeZoneInfo.Local.BaseUtcOffset).Substring(0, 25);
         }
     }
 }

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using GPConnectAdaptor.Models.AddAppointment;
+using GPConnectAdaptor.Models.Slot;
 
 namespace GPConnectAdaptor
 {
@@ -16,26 +17,36 @@ namespace GPConnectAdaptor
             _addAppointmentClient = addAppointmentClient;
         }
         
-        /// <summary>
-        /// This will replace all public methods here
-        /// </summary>
-        /// <param name="request"></param>
-        /// <returns></returns>
-        public async Task<AddAppointmentResponse> Orchestrate(TempAddAppointmentRequest request)
-        {
-            var slotResponse =  await _slotClient.GetSlots(request.Start, request.End);
-            
-            
-            return new AddAppointmentResponse();
-        }
+        // /// <summary>
+        // /// Placeholder for new method
+        // /// </summary>
+        // /// <param name="request"></param>
+        // /// <returns></returns>
+        // public async Task<AddAppointmentResponse> Orchestrate(TempAddAppointmentRequest request)
+        // {
+        //     
+        // }
 
+        /// <summary>
+        /// Add Appointment. Also temporary.
+        /// </summary>
+        /// <param name="criteria"></param>
+        /// <returns></returns>
         public async Task<AddAppointmentResponse> AddAppointment(AddAppointmentCriteria criteria)
         {
-            return await _addAppointmentClient.AddAppointment(
-                criteria.SlotReference,
-                criteria.PatientId,
-                criteria.LocationId,
-                criteria.Start, criteria.End);
+            try
+            {
+                return await _addAppointmentClient.AddAppointment(
+                    criteria.SlotReference,
+                    criteria.PatientId,
+                    criteria.LocationId,
+                    criteria.Start, criteria.End);
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Got Slots, but failed to book appointment");
+            }
+            
         }
         
         
@@ -46,21 +57,21 @@ namespace GPConnectAdaptor
         /// <returns></returns>
         public async Task<AddAppointmentCriteria> GetSlotInfo(TempAddAppointmentRequest request)
         {
-            var slotResponse =  await _slotClient.GetSlots(request.Start, request.End);
-            var slot = slotResponse.entry
-                .Select(e => e.resource)
-                .Where(r => r.resourceType == "Slot")
-                .First(s => 
-                    s.start >= request.Start.Subtract(new TimeSpan(0,0,1)) && 
-                    s.end <= request.End.AddSeconds(1));
+            SlotResponse slots;
+            Resource slot;
 
-            var scheduleId = slot.schedule.reference.Substring(9);
+            try
+            {
+                slots =  await _slotClient.GetSlots(request.Start, request.End);
+                slot = FindSlot(request, slots);
+            }
+            catch (ArgumentNullException e)
+            { 
+                throw new Exception("No Slots found for this time");
+            }
 
-            var locationId = slotResponse.entry.Select(e => e.resource)
-                .Where(r => r.resourceType == "Schedule")
-                .First(s => s.id == scheduleId)
-                .actor.First(a => a.reference.StartsWith("Location/")).reference;
-
+            var scheduleId = slot.schedule.reference.Substring(9); //actual id starts at 9th char because of weird contract
+            var locationId = GetLocaationId(slots, scheduleId);
 
             return new AddAppointmentCriteria()
             {
@@ -70,6 +81,25 @@ namespace GPConnectAdaptor
                 Start = slot.start ?? new DateTime(),
                 End = slot.end ?? new DateTime()
             };
+        }
+
+        private static string GetLocaationId(SlotResponse slots, string scheduleId)
+        {
+            var locationId = slots.entry.Select(e => e.resource)
+                .Where(r => r.resourceType == "Schedule")
+                .First(s => s.id == scheduleId)
+                .actor.First(a => a.reference.StartsWith("Location/")).reference;
+            return locationId;
+        }
+
+        private static Resource FindSlot(TempAddAppointmentRequest request, SlotResponse slots)
+        {
+            return slots.entry
+                .Select(e => e.resource)
+                .Where(r => r.resourceType == "Slot")
+                .First(s =>
+                    s.start >= request.Start.Subtract(new TimeSpan(0, 0, 1)) &&
+                    s.end <= request.End.AddSeconds(1));
         }
     }
     

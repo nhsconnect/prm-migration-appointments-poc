@@ -18,7 +18,7 @@ namespace GPConnectAdaptorTests
         private readonly string _appointmentResponse;
         private readonly HttpTest _httpTest;
         private readonly ITestOutputHelper _output;
-        private readonly string _expectedUri = "https://orange.testlab.nhs.uk/gpconnect-demonstrator/v1/fhir/Appointment";
+        private readonly string _expectedUri = "http://localhost:9000/gpconnect-demonstrator/v1/fhir/Appointment";
 
 
         public AddAppointmentHttpClientWrapperTests(ITestOutputHelper output)

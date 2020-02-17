@@ -1,5 +1,7 @@
 using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Flurl.Http;
 using GPConnectAdaptor.Models.Slot;
 
 namespace GPConnectAdaptor.Slots
@@ -16,8 +18,11 @@ namespace GPConnectAdaptor.Slots
         } 
         public async Task<SlotResponse> GetSlots(DateTime start, DateTime end)
         {
-            string response = await _clientWrapper.GetAsync(start, end);
-            return _deserializer.Deserialize(response);
+            var response = await _clientWrapper.GetAsync(start, end);
+            var slots = _deserializer.Deserialize(response);
+
+            return slots;
+
         }
     }
 }

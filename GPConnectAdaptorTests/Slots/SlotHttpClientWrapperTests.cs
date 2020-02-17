@@ -15,7 +15,7 @@ namespace GPConnectAdaptorTests.Slots
         private HttpTest _httpTest;
         private readonly ITestOutputHelper _output;
         private readonly string _expectedUri =
-            "https://orange.testlab.nhs.uk/gpconnect-demonstrator/v1/fhir/Slot?start=ge2020-02-08T10%3A00%3A00%2B00%3A00&end=le2020-02-08T10%3A10%3A00%2B00%3A00&status=free&_include=Slot%3Aschedule&_include%3Arecurse=Schedule%3Aactor%3APractitioner&searchFilter=https%3A%2F%2Ffhir.nhs.uk%2FSTU3%2FCodeSystem%2FGPConnect-OrganisationType-1%7Cgp-practice";
+            "http://localhost:9000/gpconnect-demonstrator/v1/fhir/Slot?start=ge2020-02-08T10%3A00%3A00%2B00%3A00&end=le2020-02-08T10%3A10%3A00%2B00%3A00&status=free&_include=Slot%3Aschedule&_include%3Arecurse=Schedule%3Aactor%3APractitioner&searchFilter=https%3A%2F%2Ffhir.nhs.uk%2FSTU3%2FCodeSystem%2FGPConnect-OrganisationType-1%7Cgp-practice";
 
         public SlotHttpClientWrapperTests(ITestOutputHelper output)
         {

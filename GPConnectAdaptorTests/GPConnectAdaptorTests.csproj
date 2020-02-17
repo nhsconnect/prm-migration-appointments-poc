@@ -21,19 +21,29 @@
 
     <ItemGroup>
       <None Remove="TestJwtToken.json" />
-      <EmbeddedResource Include="TestData\AddAppointment\TestAddAppointmentRequest.json" />
+      <EmbeddedResource Include="TestData\AddAppointmentTestData\TestAddAppointmentRequest.json" />
+      <EmbeddedResource Include="TestData\SlotTestData\NoSlotsResponse.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="TestData\SlotTestData\TestSlotResponse.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="TestData\SlotTestData\TestSlotResponse2.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
+      <EmbeddedResource Include="TestData\SlotTestData\TestSlotResponse3.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </EmbeddedResource>
       <EmbeddedResource Include="TestData\TestJwtToken.json" />
-      <EmbeddedResource Include="TestData\TestSlotResponse.json" />
       <None Remove="TestSlotResponse.json" />
       <None Remove="TestData\TestAddAppointmentRequest.json" />
       <None Remove="TestData\AddAppointment\AppointmentResponse.json" />
-      <EmbeddedResource Include="TestData\AddAppointment\AppointmentResponse.json" />
+      <EmbeddedResource Include="TestData\AddAppointmentTestData\AppointmentResponse.json" />
       <None Remove="TestData\AddAppointment\FailedAppointmentResponse.json" />
-      <EmbeddedResource Include="TestData\AddAppointment\FailedAppointmentResponse.json" />
+      <EmbeddedResource Include="TestData\AddAppointmentTestData\FailedAppointmentResponse.json" />
       <None Remove="TestData\TestSlotResponse2.json" />
-      <EmbeddedResource Include="TestData\TestSlotResponse2.json" />
       <None Remove="TestData\TestSlotResponse3.json" />
-      <EmbeddedResource Include="TestData\TestSlotResponse3.json" />
+      <None Remove="TestData\NoSlotsResponse.json" />
     </ItemGroup>
 
 </Project>

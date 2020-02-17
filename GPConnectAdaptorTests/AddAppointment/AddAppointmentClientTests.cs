@@ -17,9 +17,9 @@ namespace GPConnectAdaptorTests
     public class AddAppointmentClientTests
     {
         private readonly string _appointmentSuccessPath =
-            "GPConnectAdaptorTests.TestData.AddAppointment.AppointmentResponse.json";
+            "GPConnectAdaptorTests.TestData.AddAppointmentTestData.AppointmentResponse.json";
         private readonly string _appointmentFailPath =
-            "GPConnectAdaptorTests.TestData.AddAppointment.FailedAppointmentResponse.json";
+            "GPConnectAdaptorTests.TestData.AddAppointmentTestData.FailedAppointmentResponse.json";
         private Dictionary<string, string> _filePaths;
         private readonly Dictionary<string, string> _files = new Dictionary<string, string>();
 
