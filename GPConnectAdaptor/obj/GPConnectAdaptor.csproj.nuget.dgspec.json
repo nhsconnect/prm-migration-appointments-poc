@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/parthaggarwal/dev/AppointmentsMigrator/GPConnectAdaptor/GPConnectAdaptor.csproj": {}
+    "/Users/parthaggarwal/dev/prm-migration-appointments-poc/GPConnectAdaptor/GPConnectAdaptor.csproj": {}
   },
   "projects": {
-    "/Users/parthaggarwal/dev/AppointmentsMigrator/GPConnectAdaptor/GPConnectAdaptor.csproj": {
+    "/Users/parthaggarwal/dev/prm-migration-appointments-poc/GPConnectAdaptor/GPConnectAdaptor.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/parthaggarwal/dev/AppointmentsMigrator/GPConnectAdaptor/GPConnectAdaptor.csproj",
+        "projectUniqueName": "/Users/parthaggarwal/dev/prm-migration-appointments-poc/GPConnectAdaptor/GPConnectAdaptor.csproj",
         "projectName": "GPConnectAdaptor",
-        "projectPath": "/Users/parthaggarwal/dev/AppointmentsMigrator/GPConnectAdaptor/GPConnectAdaptor.csproj",
+        "projectPath": "/Users/parthaggarwal/dev/prm-migration-appointments-poc/GPConnectAdaptor/GPConnectAdaptor.csproj",
         "packagesPath": "/Users/parthaggarwal/.nuget/packages/",
-        "outputPath": "/Users/parthaggarwal/dev/AppointmentsMigrator/GPConnectAdaptor/obj/",
+        "outputPath": "/Users/parthaggarwal/dev/prm-migration-appointments-poc/GPConnectAdaptor/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/parthaggarwal/.config/NuGet/NuGet.Config"
@@ -38,7 +38,7 @@
           "dependencies": {
             "Flurl.Http": {
               "target": "Package",
-              "version": "[3.0.0-pre3, )"
+              "version": "[2.4.2, )"
             },
             "Hl7.Fhir.STU3": {
               "target": "Package",

@@ -1,7 +1,6 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Flurl.Http;
 using GPConnectAdaptor.Models.Slot;
 
 namespace GPConnectAdaptor.Slots

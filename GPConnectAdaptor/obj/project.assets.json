@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "Flurl/3.0.0-pre3": {
+      "Flurl/2.8.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Flurl.dll": {}
@@ -11,10 +11,10 @@
           "lib/netstandard2.0/Flurl.dll": {}
         }
       },
-      "Flurl.Http/3.0.0-pre3": {
+      "Flurl.Http/2.4.2": {
         "type": "package",
         "dependencies": {
-          "Flurl": "3.0.0-pre3",
+          "Flurl": "2.8.2",
           "Newtonsoft.Json": "12.0.2",
           "System.Text.Encoding.CodePages": "4.5.1"
         },
@@ -1102,16 +1102,15 @@
     }
   },
   "libraries": {
-    "Flurl/3.0.0-pre3": {
-      "sha512": "G/rm5Y9OxrBowy5s7xyOYJrqcRooZ1Yei2c1XiQPXGLtzL7zYBOsYtrqPCE1VNK8IoZe7jIJdfHWrQoL1rf9WQ==",
+    "Flurl/2.8.2": {
+      "sha512": "3VEYAqkGTGHgla4xuyEB4d8XGLeMX2k05C4WfI7YmKQHsL7RhoGu3L6h1xsKKTPFWjEL13p09XOIGwD1pQ86dg==",
       "type": "package",
-      "path": "flurl/3.0.0-pre3",
+      "path": "flurl/2.8.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "flurl.3.0.0-pre3.nupkg.sha512",
+        "flurl.2.8.2.nupkg.sha512",
         "flurl.nuspec",
-        "icon.png",
         "lib/net40/Flurl.dll",
         "lib/net40/Flurl.xml",
         "lib/netstandard1.0/Flurl.dll",
@@ -1122,16 +1121,15 @@
         "lib/netstandard2.0/Flurl.xml"
       ]
     },
-    "Flurl.Http/3.0.0-pre3": {
-      "sha512": "InSbKprOE8TSBn6ALlJP5ptxvUwPu5pAUCr/CWhCts/hz4kyZ9mxtT6/gr4pct1ugJXeAVswq5brv1VuHWpvOg==",
+    "Flurl.Http/2.4.2": {
+      "sha512": "VfSJ0DKzh6kf2IOZGG1/JpHajhtqzGp1t+M1QSyFGse7c4Gg1DpH80LTveYea2hV1BEtvPPEp6A4iZ78D8bxGQ==",
       "type": "package",
-      "path": "flurl.http/3.0.0-pre3",
+      "path": "flurl.http/2.4.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "flurl.http.3.0.0-pre3.nupkg.sha512",
+        "flurl.http.2.4.2.nupkg.sha512",
         "flurl.http.nuspec",
-        "icon.png",
         "lib/net45/Flurl.Http.dll",
         "lib/net45/Flurl.Http.xml",
         "lib/net46/Flurl.Http.dll",
@@ -4089,7 +4087,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Flurl.Http >= 3.0.0-pre3",
+      "Flurl.Http >= 2.4.2",
       "Hl7.Fhir.STU3 >= 1.5.0-beta1",
       "System.IdentityModel.Tokens.Jwt >= 5.6.0"
     ]
@@ -4100,11 +4098,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/parthaggarwal/dev/AppointmentsMigrator/GPConnectAdaptor/GPConnectAdaptor.csproj",
+      "projectUniqueName": "/Users/parthaggarwal/dev/prm-migration-appointments-poc/GPConnectAdaptor/GPConnectAdaptor.csproj",
       "projectName": "GPConnectAdaptor",
-      "projectPath": "/Users/parthaggarwal/dev/AppointmentsMigrator/GPConnectAdaptor/GPConnectAdaptor.csproj",
+      "projectPath": "/Users/parthaggarwal/dev/prm-migration-appointments-poc/GPConnectAdaptor/GPConnectAdaptor.csproj",
       "packagesPath": "/Users/parthaggarwal/.nuget/packages/",
-      "outputPath": "/Users/parthaggarwal/dev/AppointmentsMigrator/GPConnectAdaptor/obj/",
+      "outputPath": "/Users/parthaggarwal/dev/prm-migration-appointments-poc/GPConnectAdaptor/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "/Users/parthaggarwal/.config/NuGet/NuGet.Config"
@@ -4131,7 +4129,7 @@
         "dependencies": {
           "Flurl.Http": {
             "target": "Package",
-            "version": "[3.0.0-pre3, )"
+            "version": "[2.4.2, )"
           },
           "Hl7.Fhir.STU3": {
             "target": "Package",

@@ -1,11 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Text.Json;
 using System.Threading.Tasks;
 using Flurl;
 using Flurl.Http;
-using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 
 namespace GPConnectAdaptor.Slots
 {
@@ -39,7 +36,7 @@ namespace GPConnectAdaptor.Slots
             }
             catch (FlurlHttpException f)
             {
-                dynamic obj = await f.Call.Response.GetJsonAsync();
+                dynamic obj = await f.GetResponseJsonAsync();
                 var dict = (IDictionary<string, object>)obj;
                 if (dict["resourceType"].Equals("OperationOutcome"))
                 {
